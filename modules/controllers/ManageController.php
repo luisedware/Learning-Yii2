@@ -8,10 +8,9 @@ use yii\web\Controller;
 
 class ManageController extends Controller
 {
-    public $layout = false;
-
     public function actionMailChangePass()
     {
+        $this->layout = false;
         $model = new Admin;
         $request = Yii::$app->request;
 
@@ -46,6 +45,14 @@ class ManageController extends Controller
             $model->adminUser = $adminUser;
             return $this->render('mail-change-pass', compact('model'));
         }
+    }
+
+    public function actionManagers()
+    {
+        $this->layout = false;
+        $managers = Admin::find()->all();
+
+        return $this->render('managers', ['managers' => $managers]);
     }
 }
 

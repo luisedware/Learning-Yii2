@@ -176,8 +176,8 @@
                 <i class="icon-chevron-down"></i>
             </a>
             <ul class="submenu">
-                <li><a href="">管理员列表</a></li>
-                <li><a href="">加入新管理员</a></li>
+                <li><a href="<?= yii\helpers\Url::to(['manage/managers'])?>">管理员列表</a></li>
+                <li><a href="<?= yii\helpers\Url::to(['manage/reg'])?>">加入新管理员</a></li>
             </ul>
         </li>
 

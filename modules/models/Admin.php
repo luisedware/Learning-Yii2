@@ -6,9 +6,6 @@ use yii\db\ActiveRecord;
 
 class Admin extends ActiveRecord
 {
-    public $adminUser;
-    public $adminPass;
-    public $adminEmail;
     public $rememberMe = true;
     public $rePass;
 
