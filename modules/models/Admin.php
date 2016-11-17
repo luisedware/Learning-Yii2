@@ -14,23 +14,40 @@ class Admin extends ActiveRecord
         return "{{%admin}}";
     }
 
+    public function attributeLabels()
+    {
+        return [
+            'adminUser' => '管理员账号',
+            'adminPass' => '管理员邮箱',
+            'adminEmail' => '管理员密码',
+            'rePass' => '确认密码',
+        ];
+    }
+
     public function rules()
     {
         return [
-            ['adminUser', 'required', 'message' => '管理员账号不能为空', 'on' => ['login', 'seek-pass', 'change-password']],
-            ['adminPass', 'required', 'message' => '管理员密码不能为空', 'on' => ['login', 'change-password']],
+            [
+                'adminUser',
+                'required',
+                'message' => '管理员账号不能为空',
+                'on' => ['login', 'seek-pass', 'change-password', 'admin-add']
+            ],
+            ['adminUser', 'unique', 'message' => '管理员账号已注册', 'on' => ['admin-add']],
+            ['adminPass', 'required', 'message' => '管理员密码不能为空', 'on' => ['login', 'change-password', 'admin-add']],
             ['adminPass', 'validatePass', 'on' => 'login'],
             ['rememberMe', 'boolean', 'on' => 'login'],
-            ['adminEmail', 'required', 'message' => '电子邮箱不能为空', 'on' => 'seek-pass'],
-            ['adminEmail', 'email', 'message' => '电子邮箱格式不正确', 'on' => 'seek-pass'],
+            ['adminEmail', 'required', 'message' => '电子邮箱不能为空', 'on' => ['seek-pass', 'admin-add']],
+            ['adminEmail', 'email', 'message' => '电子邮箱格式不正确', 'on' => ['seek-pass', 'admin-add']],
+            ['adminEmail', 'unique', 'message' => '电子邮箱格式已注册', 'on' => ['admin-add']],
             ['adminEmail', 'validateEmail', 'on' => 'seek-pass'],
-            ['rePass', 'required', 'message' => '确认密码不能为空', 'on' => 'change-password'],
+            ['rePass', 'required', 'message' => '确认密码不能为空', 'on' => ['change-password', 'admin-add']],
             [
                 'rePass',
                 'compare',
                 'compareAttribute' => 'adminPass',
                 'message' => '两次密码输入不一致',
-                'on' => 'change-password'
+                'on' => ['change-password', 'admin-add']
             ]
         ];
     }
@@ -119,6 +136,22 @@ class Admin extends ActiveRecord
                 ['adminPass' => md5($this->adminPass)],
                 'adminUser = :user', [':user' => $this->adminUser]
             );
+        }else{
+            return false;
+        }
+    }
+
+    public function reg($data)
+    {
+        $this->scenario = 'admin-add';
+        if($this->load($data) && $this->validate()){
+            $this->adminPass = md5($this->adminPass);
+            // save 方法传值 false 不会对数据进行验证
+            if($this->save(false)){
+                return true;
+            }else{
+                return false;
+            }
         }else{
             return false;
         }

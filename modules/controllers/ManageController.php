@@ -50,13 +50,31 @@ class ManageController extends Controller
 
     public function actionManagers()
     {
-        $this->layout = false;
+        $this->layout = 'main';
         $model = Admin::find();
         $count = $model->count();
         $pager = new Pagination(['totalCount' => $count, 'pageSize' => 50]);
         $managers = $model->offset($pager->offset)->limit($pager->limit)->all();
 
         return $this->render('managers', compact('managers', 'pager'));
+    }
+
+    public function actionReg()
+    {
+        $this->layout = 'main';
+        $model = new Admin;
+
+        if(Yii::$app->request->isPost){
+            $post = Yii::$app->request->post();
+
+            if($model->reg($post)){
+                Yii::$app->session->setFlash('info', '添加成功');
+            }else{
+                Yii::$app->session->setFlash('info', '添加失败');
+            }
+        }
+
+        return $this->render('reg', compact('model'));
     }
 }
 
