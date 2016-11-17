@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # phpstorm project files
 .idea
 
@@ -50,11 +49,10 @@ views/
 web/
 yii
 yii.bat
-=======
 assets/*
 !assets/.gitignore
 protected/runtime/*
 !protected/runtime/.gitignore
 protected/data/*.db
 themes/classic/views/
->>>>>>> 5bc8ed7bc40192c1bba7ee5ac453ca20c3f470bd
+
