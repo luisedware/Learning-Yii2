@@ -123,7 +123,6 @@ class Admin extends ActiveRecord
                 'adminUser = :user', [':user' => $this->adminUser]
             );
         }else{
-            return false;
         }
     }
 }
