@@ -89,7 +89,23 @@ class ManageController extends Controller
             Yii::$app->session->setFlash('info', '删除成功');
             $this->redirect(['manage/managers']);
         }
+    }
 
+    public function actionChangeEmail()
+    {
+        $this->layout = 'main';
+        $model = Admin::find()->where('adminUser = :user',[':user'=>Yii::$app->session['admin']['adminUser']])->one();
+
+        if(Yii::$app->request->isPost){
+            $post = Yii::$app->request->post();
+            if($model->changeEmail($post)){
+                Yii::$app->session->setFlash('info','修改成功');
+            }
+        }
+
+        // 设置密码为空
+        $model->adminPass = "";
+        return $this->render('change-email',compact('model'));
     }
 }
 

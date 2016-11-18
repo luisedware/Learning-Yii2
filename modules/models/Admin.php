@@ -18,8 +18,8 @@ class Admin extends ActiveRecord
     {
         return [
             'adminUser' => '管理员账号',
-            'adminPass' => '管理员邮箱',
-            'adminEmail' => '管理员密码',
+            'adminPass' => '管理员密码',
+            'adminEmail' => '管理员邮箱',
             'rePass' => '确认密码',
         ];
     }
@@ -34,12 +34,17 @@ class Admin extends ActiveRecord
                 'on' => ['login', 'seek-pass', 'change-password', 'admin-add']
             ],
             ['adminUser', 'unique', 'message' => '管理员账号已注册', 'on' => ['admin-add']],
-            ['adminPass', 'required', 'message' => '管理员密码不能为空', 'on' => ['login', 'change-password', 'admin-add']],
-            ['adminPass', 'validatePass', 'on' => 'login'],
+            [
+                'adminPass',
+                'required',
+                'message' => '管理员密码不能为空',
+                'on' => ['login', 'change-password', 'admin-add', 'change-email']
+            ],
+            ['adminPass', 'validatePass', 'on' => ['login', 'change-email']],
             ['rememberMe', 'boolean', 'on' => 'login'],
-            ['adminEmail', 'required', 'message' => '电子邮箱不能为空', 'on' => ['seek-pass', 'admin-add']],
-            ['adminEmail', 'email', 'message' => '电子邮箱格式不正确', 'on' => ['seek-pass', 'admin-add']],
-            ['adminEmail', 'unique', 'message' => '电子邮箱格式已注册', 'on' => ['admin-add']],
+            ['adminEmail', 'required', 'message' => '电子邮箱不能为空', 'on' => ['seek-pass', 'admin-add', 'change-email']],
+            ['adminEmail', 'email', 'message' => '电子邮箱格式不正确', 'on' => ['seek-pass', 'admin-add', 'change-email']],
+            ['adminEmail', 'unique', 'message' => '电子邮箱格式已注册', 'on' => ['admin-add', 'change-email']],
             ['adminEmail', 'validateEmail', 'on' => 'seek-pass'],
             ['rePass', 'required', 'message' => '确认密码不能为空', 'on' => ['change-password', 'admin-add']],
             [
@@ -155,6 +160,17 @@ class Admin extends ActiveRecord
         }else{
             return false;
         }
+    }
+
+    public function changeEmail($data)
+    {
+        $this->scenario = 'change-email';
+
+        if($this->load($data) && $this->validate()){
+            return (bool)$this->updateAll(['adminEmail' => $this->adminEmail], 'adminUser = :user',
+                [':user' => $this->adminUser]);
+        }
+        return false;
     }
 }
 
