@@ -44,12 +44,20 @@
                             <td><?php echo long2ip($manager->loginIP) ?></td>
                             <td><?php echo date('Y-m-d H:i:s', $manager->createdAt) ?></td>
                             <td class="align-right">
-                                <a href="/index.php?r=admin%2Fmanage%2Fdel&adminid=1">删除</a>
+                                <a href="<?php echo yii\helpers\Url::to([
+                                    'manage/delete',
+                                    'adminId' => $manager->adminId
+                                ]) ?>">删除</a>
                             </td>
                         </tr>
                     <?php } ?>
                     </tbody>
                 </table>
+                <?php
+                if(Yii::$app->session->hasFlash('info')){
+                    echo Yii::$app->session->getFlash('info');
+                }
+                ?>
             </div>
             <div class="pagination pull-right">
                 <?php echo yii\widgets\LinkPager::widget([
