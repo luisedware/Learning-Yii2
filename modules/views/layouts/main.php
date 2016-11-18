@@ -137,7 +137,7 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li><a href="<?php echo yii\helpers\Url::to(['manage/change-email'])?>">个人信息管理</a></li>
-                    <li><a href="">修改密码</a></li>
+                    <li><a href="<?php echo yii\helpers\Url::to(['manage/change-password'])?>">修改密码</a></li>
                     <li><a href="#">订单管理</a></li>
                 </ul>
             </li>

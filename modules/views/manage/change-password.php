@@ -7,7 +7,7 @@ use yii\helpers\Html;
     <div class="container-fluid">
         <div id="pad-wrapper" class="new-user">
             <div class="row-fluid header">
-                <h3>修改信息</h3></div>
+                <h3>修改密码</h3></div>
             <div class="row-fluid form-wrapper">
                 <!-- left column -->
                 <div class="span9 with-sidebar">
@@ -25,7 +25,7 @@ use yii\helpers\Html;
                         ?>
                         <?php echo $form->field($model, 'adminUser')->textInput(['class' => 'span9','disabled'=>true]); ?>
                         <?php echo $form->field($model, 'adminPass')->passwordInput(['class' => 'span9']); ?>
-                        <?php echo $form->field($model, 'adminEmail')->textInput(['class' => 'span9']); ?>
+                        <?php echo $form->field($model, 'rePass')->passwordInput(['class' => 'span9']); ?>
                         <div class="span11 field-box actions">
                             <?php echo Html::submitButton('修改', ['class' => 'btn-glow primary']); ?>
                             <span>或者</span>

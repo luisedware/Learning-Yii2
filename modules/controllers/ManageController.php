@@ -94,18 +94,37 @@ class ManageController extends Controller
     public function actionChangeEmail()
     {
         $this->layout = 'main';
-        $model = Admin::find()->where('adminUser = :user',[':user'=>Yii::$app->session['admin']['adminUser']])->one();
+        $model = Admin::find()->where('adminUser = :user',
+            [':user' => Yii::$app->session['admin']['adminUser']])->one();
 
         if(Yii::$app->request->isPost){
             $post = Yii::$app->request->post();
             if($model->changeEmail($post)){
-                Yii::$app->session->setFlash('info','修改成功');
+                Yii::$app->session->setFlash('info', '修改成功');
             }
         }
 
         // 设置密码为空
         $model->adminPass = "";
-        return $this->render('change-email',compact('model'));
+        return $this->render('change-email', compact('model'));
+    }
+
+    public function actionChangePassword()
+    {
+        $this->layout = 'main';
+        $model = Admin::find()->where('adminUser = :user',
+            [':user' => Yii::$app->session['admin']['adminUser']])->one();
+
+        if(Yii::$app->request->isPost){
+            $post = Yii::$app->request->post();
+            if($model->changePass($post)){
+                Yii::$app->session->setFlash('info', '修改成功');
+            }
+        }
+
+        $model->adminPass = '';
+        $model->rePass = '';
+        return $this->render('change-password', compact('model'));
     }
 }
 
