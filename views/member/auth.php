@@ -21,15 +21,16 @@
                         </div>
                     </div>
 
-                    <form role="form" class="login-form cf-style-1">
+                    <form role="form" class="login-form cf-style-1" method="post" action="<?php echo \yii\helpers\Url::to(['member/auth']); ?>">
+                        <input name="_csrf" type="hidden" id="_csrf" value="<?=Yii::$app->request->csrfToken?>">
                         <div class="field-row">
                             <label>电子邮箱</label>
-                            <input type="text" class="le-input">
+                            <input type="text" class="le-input" name="userName" value="yii2_583143555ca91">
                         </div><!-- /.field-row -->
 
                         <div class="field-row">
                             <label>密码</label>
-                            <input type="text" class="le-input">
+                            <input type="text" class="le-input" name="userPass" value="583143555ca9b">
                         </div><!-- /.field-row -->
 
                         <div class="field-row clearfix">
@@ -55,10 +56,11 @@
                     <h2 class="bordered">新建账户</h2>
                     <p>创建一个属于你自己的账户</p>
 
-                    <form role="form" class="register-form cf-style-1">
+                    <form method="post" action="<?php echo \yii\helpers\Url::to(['member/reg']); ?>" role="form" class="register-form cf-style-1">
                         <div class="field-row">
                             <label>电子邮箱</label>
-                            <input type="text" class="le-input">
+                            <input type="text" class="le-input" name="userEmail" id="userEmail">
+                            <input name="_csrf" type="hidden" id="_csrf" value="<?=Yii::$app->request->csrfToken?>">
                         </div><!-- /.field-row -->
 
                         <div class="buttons-holder">

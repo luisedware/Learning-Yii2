@@ -31,14 +31,14 @@ class Admin extends ActiveRecord
                 'adminUser',
                 'required',
                 'message' => '管理员账号不能为空',
-                'on' => ['login', 'seek-pass', 'change-password', 'admin-add']
+                'on' => ['login', 'seek-pass', 'change-password', 'admin-add'],
             ],
             ['adminUser', 'unique', 'message' => '管理员账号已注册', 'on' => ['admin-add']],
             [
                 'adminPass',
                 'required',
                 'message' => '管理员密码不能为空',
-                'on' => ['login', 'change-password', 'admin-add', 'change-email']
+                'on' => ['login', 'change-password', 'admin-add', 'change-email'],
             ],
             ['adminPass', 'validatePass', 'on' => ['login', 'change-email']],
             ['rememberMe', 'boolean', 'on' => 'login'],
@@ -52,17 +52,17 @@ class Admin extends ActiveRecord
                 'compare',
                 'compareAttribute' => 'adminPass',
                 'message' => '两次密码输入不一致',
-                'on' => ['change-password', 'admin-add']
-            ]
+                'on' => ['change-password', 'admin-add'],
+            ],
         ];
     }
 
     public function validatePass()
     {
-        if(!$this->hasErrors()){
+        if (!$this->hasErrors()) {
             $data = self::find()->where('adminUser = :user and adminPass = :pass',
                 [':user' => $this->adminUser, ':pass' => md5($this->adminPass)])->one();
-            if(is_null($data)){
+            if (is_null($data)) {
                 $this->addError('adminPass', "用户名或密码错误");
             }
         }
@@ -70,10 +70,10 @@ class Admin extends ActiveRecord
 
     public function validateEmail()
     {
-        if(!$this->hasErrors()){
+        if (!$this->hasErrors()) {
             $data = self::find()->where('adminUser = :user and adminEmail = :email',
                 [':user' => $this->adminUser, ':email' => $this->adminEmail])->one();
-            if(is_null($data)){
+            if (is_null($data)) {
                 $this->addError('adminEmail', "用户名或电子邮箱错误");
             }
         }
@@ -82,7 +82,7 @@ class Admin extends ActiveRecord
     public function login($data)
     {
         $this->scenario = 'login';
-        if($this->load($data) && $this->validate()){
+        if ($this->load($data) && $this->validate()) {
             // 跨页使用 Session
             $lifeTime = $this->rememberMe ? 24 * 3600 : 0;
             $session = \Yii::$app->session;
@@ -95,11 +95,11 @@ class Admin extends ActiveRecord
             // 更新用户的登录时间
             $this->updateAll([
                 'loginTime' => time(),
-                'loginIP' => ip2long(\Yii::$app->request->userIP)
+                'loginIP' => ip2long(\Yii::$app->request->userIP),
             ], 'adminUser = :user', [':user' => $this->adminUser]);
 
             return (bool)$session['admin']['isLogin'];
-        }else{
+        } else {
             return false;
         }
     }
@@ -108,22 +108,22 @@ class Admin extends ActiveRecord
     {
         $this->scenario = 'seek-pass';
 
-        if($this->load($data) && $this->validate()){
+        if ($this->load($data) && $this->validate()) {
             $time = time();
             $token = $this->createToken($data['Admin']['adminUser'], $time);
             $params = ['adminUser' => $data['Admin']['adminUser'], 'time' => $time, 'token' => $token];
 
             $mailer = \Yii::$app->mailer->compose('seekpass', $params);
-            $mailer->setFrom("ivan_tomic@163.com");
+            $mailer->setFrom("luisedware@163.com");
             $mailer->setTo($data['Admin']['adminEmail']);
             $mailer->setSubject("慕课商城-找回密码");
 
-            if($mailer->send()){
+            if ($mailer->send()) {
                 return true;
-            }else{
+            } else {
                 return false;
             }
-        }else{
+        } else {
             return false;
         }
     }
@@ -136,12 +136,12 @@ class Admin extends ActiveRecord
     public function changePass($data)
     {
         $this->scenario = "change-password";
-        if($this->load($data) && $this->validate()){
+        if ($this->load($data) && $this->validate()) {
             return $this->updateAll(
                 ['adminPass' => md5($this->adminPass)],
                 'adminUser = :user', [':user' => $this->adminUser]
             );
-        }else{
+        } else {
             return false;
         }
     }
@@ -149,15 +149,15 @@ class Admin extends ActiveRecord
     public function reg($data)
     {
         $this->scenario = 'admin-add';
-        if($this->load($data) && $this->validate()){
+        if ($this->load($data) && $this->validate()) {
             $this->adminPass = md5($this->adminPass);
             // save 方法传值 false 不会对数据进行验证
-            if($this->save(false)){
+            if ($this->save(false)) {
                 return true;
-            }else{
+            } else {
                 return false;
             }
-        }else{
+        } else {
             return false;
         }
     }
@@ -166,7 +166,7 @@ class Admin extends ActiveRecord
     {
         $this->scenario = 'change-email';
 
-        if($this->load($data) && $this->validate()){
+        if ($this->load($data) && $this->validate()) {
             return (bool)$this->updateAll(['adminEmail' => $this->adminEmail], 'adminUser = :user',
                 [':user' => $this->adminUser]);
         }

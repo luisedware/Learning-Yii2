@@ -25,7 +25,8 @@ composer.phar
 phpunit.phar
 # local phpunit config
 /phpunit.xml
-
+config/web.php
+config/db.php
 tests/_output/*
 tests/_support/_generated
 LICENSE.md

@@ -36,8 +36,8 @@ $config = [
             'transport' => [
                 'class' => 'Swift_SmtpTransport',
                 'host' => 'smtp.163.com',
-                'username' => 'Your Email',
-                'password' => 'Your Password',
+                'username' => '*',
+                'password' => '*',
                 'port' => '465',
                 'encryption' => 'ssl',
             ],
@@ -64,18 +64,18 @@ $config = [
     'params' => $params,
 ];
 
-if(YII_ENV_DEV){
+if (YII_ENV_DEV) {
     // configuration adjustments for 'dev' environment
     $config['bootstrap'][] = 'debug';
     $config['modules']['debug'] = [
         'class' => 'yii\debug\Module',
-        'allowedIPs' => ['127.0.0.1']
+        'allowedIPs' => ['127.0.0.1'],
     ];
 
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',
-        'allowedIPs' => ['127.0.0.1']
+        'allowedIPs' => ['127.0.0.1'],
     ];
 }
 

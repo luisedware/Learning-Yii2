@@ -4,7 +4,7 @@
             <div class="row-fluid header">
                 <h3>用户列表</h3>
                 <div class="span10 pull-right">
-                    <a href="<?=\yii\helpers\Url::to(['user/reg'])?>" class="btn-flat success pull-right">
+                    <a href="<?=\yii\helpers\Url::to(['manage/reg'])?>" class="btn-flat success pull-right">
                         <span>&#43;</span>添加新用户</a></div>
             </div>
             <!-- Users table -->
@@ -23,6 +23,21 @@
                             <span class="line"></span>添加时间
                         </th>
                         <th class="span2">
+                            <span class="line"></span>真实姓名
+                        </th>
+                        <th class="span2">
+                            <span class="line"></span>昵称
+                        </th>
+                        <th class="span2">
+                            <span class="line"></span>性别
+                        </th>
+                        <th class="span2">
+                            <span class="line"></span>年龄
+                        </th>
+                        <th class="span2">
+                            <span class="line"></span>生日
+                        </th>
+                        <th class="span2">
                             <span class="line"></span>操作
                         </th>
                     </tr>
@@ -34,8 +49,13 @@
                             <td><?php echo $user->userId ?></td>
                             <td><?php echo $user->userName ?></td>
                             <td><?php echo $user->userEmail ?></td>
-                            <td><?php echo date('Y-m-d H:i:s', $user->createdAt) ?></td>
-                            <td class="align-right">
+                            <td><?php echo date('Y-m-d', $user->createdAt); ?></td>
+                            <td><?php echo $user->profile->trueName ?></td>
+                            <td><?php echo $user->profile->nickName ?></td>
+                            <td><?php echo $user->profile->sex == 1 ? "男" : "女" ?></td>
+                            <td><?php echo $user->profile->age ?></td>
+                            <td><?php echo $user->profile->birthday ?></td>
+                            <td class="align-left">
                                 <a href="<?php echo yii\helpers\Url::to([
                                     'user/delete',
                                     'userId' => $user->userId,
