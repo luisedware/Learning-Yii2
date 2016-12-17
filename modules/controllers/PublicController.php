@@ -16,12 +16,17 @@ class PublicController extends Controller
     {
         $model = new Admin;
 
-        if(Yii::$app->request->isPost){
+        if (Yii::$app->request->isPost) {
             $post = Yii::$app->request->post();
-            if($model->login($post)){
+
+            if ($model->login($post)) {
                 return $this->redirect('index.php?r=admin/default/index');
+            } else {
+                Yii::$app->session->setFlash('info', '登录账号或密码错误');
+                return $this->redirect(['public/login']);
             }
-        }else{
+
+        } else {
             return $this->render('login', compact('model'));
         }
     }
@@ -30,9 +35,9 @@ class PublicController extends Controller
     {
         Yii::$app->session->removeAll();
 
-        if(!isset(Yii::$app->session['admin']['isLogin'])){
+        if (!isset(Yii::$app->session['admin']['isLogin'])) {
             return $this->redirect(['public/login']);
-        }else{
+        } else {
             return $this->goBack();
         }
     }
@@ -42,11 +47,11 @@ class PublicController extends Controller
         $model = new Admin;
         $request = Yii::$app->request;
 
-        if($request->isPost){
+        if ($request->isPost) {
             $post = $request->post();
-            if($model->seekPass($post)){
+            if ($model->seekPass($post)) {
                 Yii::$app->session->setFlash('info', '电子邮件已经发送成功,请查收');
-            }else{
+            } else {
                 Yii::$app->session->setFlash('info', '电子邮件发送失败');
             }
         }

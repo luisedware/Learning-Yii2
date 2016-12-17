@@ -199,8 +199,8 @@
                 <i class="icon-chevron-down"></i>
             </a>
             <ul class="submenu">
-                <li><a href="">分类列表</a></li>
-                <li><a href="">加入分类</a></li>
+                <li><a href="<?php echo \yii\helpers\Url::to(['category/list']); ?>">分类列表</a></li>
+                <li><a href="<?php echo \yii\helpers\Url::to(['category/add']); ?>">加入分类</a></li>
             </ul>
         </li>
         <li>

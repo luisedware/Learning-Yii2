@@ -82,6 +82,7 @@ class Admin extends ActiveRecord
     public function login($data)
     {
         $this->scenario = 'login';
+
         if ($this->load($data) && $this->validate()) {
             // 跨页使用 Session
             $lifeTime = $this->rememberMe ? 24 * 3600 : 0;
