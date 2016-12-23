@@ -107,3 +107,25 @@ IF NOT EXISTS shop_category (
 )
   ENGINE = INNODB
   DEFAULT CHARSET = utf8;
+
+# 创建商品表
+DROP TABLE
+IF EXISTS shop_product;
+
+CREATE TABLE
+IF NOT EXISTS shop_product(
+  productId BIGINT UNSIGNED NOT NULL auto_increment COMMENT "商品主键 ID" ,
+  cateId BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT "分类 ID" ,
+  title VARCHAR(200) NOT NULL DEFAULT '' COMMENT "商品标题" ,
+  descr text COMMENT "商品描述" ,
+  num BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT "商品库存" ,
+  price DECIMAL(10 , 2) NOT NULL DEFAULT 00000000.00 COMMENT "商品售价" ,
+  cover VARCHAR(200) NOT NULL DEFAULT '' COMMENT "商品封面图片" ,
+  pics text COMMENT "商品所有图片" ,
+  isSale ENUM('0' , '1') NOT NULL DEFAULT '0' COMMENT "是否促销" ,
+  salePrice DECIMAL(10 , 2) NOT NULL DEFAULT 00000000.00 COMMENT "促销价格" ,
+  isHot ENUM('0' , '1') NOT NULL DEFAULT '0' COMMENT "是否热卖" ,
+  createdAt INT UNSIGNED NOT NULL DEFAULT 0 COMMENT "商品创建时间" ,
+  PRIMARY KEY(productId) ,
+  KEY shop_product_cateId(cateId)
+) ENGINE = INNODB DEFAULT CHARSET = utf8;
