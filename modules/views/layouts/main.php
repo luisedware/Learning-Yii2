@@ -136,8 +136,8 @@
                     <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="<?php echo yii\helpers\Url::to(['manage/change-email'])?>">个人信息管理</a></li>
-                    <li><a href="<?php echo yii\helpers\Url::to(['manage/change-password'])?>">修改密码</a></li>
+                    <li><a href="<?php echo yii\helpers\Url::to(['manage/change-email']) ?>">个人信息管理</a></li>
+                    <li><a href="<?php echo yii\helpers\Url::to(['manage/change-password']) ?>">修改密码</a></li>
                     <li><a href="#">订单管理</a></li>
                 </ul>
             </li>
@@ -176,8 +176,8 @@
                 <i class="icon-chevron-down"></i>
             </a>
             <ul class="submenu">
-                <li><a href="<?= yii\helpers\Url::to(['manage/managers'])?>">管理员列表</a></li>
-                <li><a href="<?= yii\helpers\Url::to(['manage/reg'])?>">加入新管理员</a></li>
+                <li><a href="<?=yii\helpers\Url::to(['manage/managers'])?>">管理员列表</a></li>
+                <li><a href="<?=yii\helpers\Url::to(['manage/reg'])?>">加入新管理员</a></li>
             </ul>
         </li>
 
@@ -210,8 +210,8 @@
                 <i class="icon-chevron-down"></i>
             </a>
             <ul class="submenu">
-                <li><a href="">商品列表</a></li>
-                <li><a href="">添加商品</a></li>
+                <li><a href="<?php echo \yii\helpers\Url::to(['product/products']); ?>">商品列表</a></li>
+                <li><a href="<?php echo \yii\helpers\Url::to(['product/add']); ?>">添加商品</a></li>
             </ul>
         </li>
         <li>
