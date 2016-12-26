@@ -17,7 +17,10 @@ use yii\helpers\Html;
                             echo Yii::$app->session->getFlash('info');
                         }
                         $form = ActiveForm::begin([
-                            'options' => ['class' => 'new_user_form inline-input'],
+                            'options' => [
+                                'class' => 'new_user_form inline-input',
+                                'action' => Yii::$app->urlManager->createUrl(['admin/product/add'])
+                            ],
                             'fieldConfig' => [
                                 'template' => '<div class="span12 field-box">{label}{input}{error}</div>',
                             ],
