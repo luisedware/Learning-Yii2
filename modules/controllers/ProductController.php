@@ -14,8 +14,13 @@ class ProductController extends Controller
     public function actionList()
     {
         $this->layout = 'main';
+        $model = Product::find();
+        $count = $model->count();
+        $pageSize = 25;
+        $pager = new Pagination(['totalCount' => $count, 'pageSize' => $pageSize]);
+        $products = $model->offset($pager->offset)->limit($pager->limit)->all();
 
-        return $this->render('products');
+        return $this->render('products', compact('products', 'pager'));
     }
 
     public function actionAdd()
