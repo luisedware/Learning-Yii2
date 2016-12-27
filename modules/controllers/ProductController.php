@@ -80,4 +80,24 @@ class ProductController extends Controller
 
         return compact('cover', 'pics');
     }
+
+    public function actionMod()
+    {
+
+    }
+
+    public function actionDel()
+    {
+
+    }
+
+    public function actionOn()
+    {
+
+    }
+
+    public function actionOff()
+    {
+
+    }
 }

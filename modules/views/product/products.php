@@ -45,11 +45,47 @@
                     <!-- row -->
                     <?php foreach ($products as $product) { ?>
                         <tr>
+                            <td>
+                                <img src="Http://<?=$product->cover?>" class="img-circle avatar hidden-phone"/>
+                                <a href="<?php echo \yii\helpers\Url::to([
+                                    'product/detail',
+                                    'productId' => $product->productId,
+                                ]); ?>">
+                                    <?=$product->title?>
+                                </a>
+                            </td>
+                            <td><?=$product->num?></td>
+                            <td><?=$product->price?></td>
+                            <td><?=$product->isHot ? "热卖" : "不热卖"?></td>
+                            <td><?=$product->isSale ? "促销中" : "不促销"?></td>
+                            <td><?=$product->salePrice?></td>
+                            <td><?=$product->isOn ? "上架" : "下架"?></td>
+                            <td><?=$product->isTui ? "推荐" : "不推荐"?></td>
                             <td class="align-right">
-                                <a href="">编辑</a>
-                                <a href="">上架</a>
-                                <a href="">下架</a>
-                                <a href="">删除</a>
+                                <a href="<?php echo \yii\helpers\Url::to([
+                                    'product/mod',
+                                    'productId' => $product->productId,
+                                ]); ?>">
+                                    编辑
+                                </a>
+                                <a href="<?php echo \yii\helpers\Url::to([
+                                    'product/on',
+                                    'productId' => $product->productId,
+                                ]); ?>">
+                                    上架
+                                </a>
+                                <a href="<?php echo \yii\helpers\Url::to([
+                                    'product/off',
+                                    'productId' => $product->productId,
+                                ]); ?>">
+                                    下架
+                                </a>
+                                <a href="<?php echo \yii\helpers\Url::to([
+                                    'product/del',
+                                    'productId' => $product->productId,
+                                ]); ?>">
+                                    删除
+                                </a>
                             </td>
                         </tr>
                     <?php } ?>
