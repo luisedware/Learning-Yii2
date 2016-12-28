@@ -83,7 +83,40 @@ class ProductController extends Controller
 
     public function actionMod()
     {
+        $this->layout = 'main';
+        $category = new Category();
+        $options = $category->getOptions();
+        $productId = Yii::$app->request->get('productId');
+        $product = Product::find()->where('productId = :id', ['id' => $productId])->one();
 
+        if (Yii::$app->request->isPost) {
+            $post = Yii::$app->request->post();
+            $uploader = new Qiniu(Product::AK, Product::SK, Product::DOMAIN, Product::BUCKET);
+            $post['Product']['cover'] = $product->cover;
+            if ($_FILES['Product']['error']['cover'] == 0) {
+                $key = uniqid();
+                $uploader->uploadFile($_FILES['Product']['tmp_name']['cover'], $key);
+                $post['Product']['cover'] = $uploader->getLink($key);
+                $uploader->delete($key);
+            }
+            $pics = [];
+            if (!empty($_FILES['Product']['tmp_name']['pics'])) {
+                foreach ($_FILES['Product']['tmp_name']['pics'] as $k => $file) {
+                    if ($_FILES['Product']['error']['pics'][$k] > 0) {
+                        continue;
+                    }
+                    $key = uniqid();
+                    $uploader->uploadFile($file, $key);
+                    $pics[] = $uploader->getLink($key);
+                }
+            }
+            $post['Product']['pics'] = json_encode(array_merge((array)json_decode($product->pics, true), $pics));
+            if ($product->load($post) && $product->save()) {
+                Yii::$app->session->setFlash('info', '修改商品成功');
+            }
+        }
+
+        return $this->render('add', compact('product', 'options'));
     }
 
     public function actionDel()
