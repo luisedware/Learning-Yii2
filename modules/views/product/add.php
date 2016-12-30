@@ -53,8 +53,9 @@ use yii\helpers\Html;
                                 $images = '';
                                 foreach (json_decode($product->pics, true) as $picture) {
                                     $images .= '<img src="http://' . $picture . '" style="width:200px;height:100%;">';
+                                    $images .= '<a href="'.\yii\helpers\Url::to(['product/remove',['url' => $picture]]).'">删除</a><br>';
                                 }
-                                echo $images.$form->field($product, 'pics[]')->fileInput(['class' => 'span9']);
+                                echo '<br>'.$images.'<br>'.$form->field($product, 'pics[]')->fileInput(['class' => 'span9']);
                             } else {
                                 echo $form->field($product, 'pics[]')->fileInput(['class' => 'span9']);
                             }
