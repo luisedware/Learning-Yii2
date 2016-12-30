@@ -97,8 +97,8 @@ class ProductController extends Controller
                 $key = uniqid();
                 $uploader->uploadFile($_FILES['Product']['tmp_name']['cover'], $key);
                 $post['Product']['cover'] = $uploader->getLink($key);
-                $uploader->delete($key);
             }
+
             $pics = [];
             if (!empty($_FILES['Product']['tmp_name']['pics'])) {
                 foreach ($_FILES['Product']['tmp_name']['pics'] as $k => $file) {
@@ -110,7 +110,9 @@ class ProductController extends Controller
                     $pics[] = $uploader->getLink($key);
                 }
             }
+            
             $post['Product']['pics'] = json_encode(array_merge((array)json_decode($product->pics, true), $pics));
+            
             if ($product->load($post) && $product->save()) {
                 Yii::$app->session->setFlash('info', '修改商品成功');
             }
@@ -121,15 +123,55 @@ class ProductController extends Controller
 
     public function actionDel()
     {
+        if (Yii::$app->request->isGet) {
+            $productId = Yii::$app->request->get('productId');
+            $product = Product::find()->where(['productId' => $productId])->one();
 
+            if ($product->delete()) {
+                Yii::$app->session->setFlash('info', '删除商品成功');
+            } else {
+                Yii::$app->session->setFlash('info', '删除商品失败');
+            }
+
+            return $this->redirect(['product/list']);
+        }
     }
 
     public function actionOn()
     {
+        if (Yii::$app->request->isGet) {
+            $productId = Yii::$app->request->get('productId');
+            $product = Product::find()->where(['productId' => $productId])->one();
 
+            $product->isOn = 1;
+            if ($product->save()) {
+                Yii::$app->session->setFlash('info', '上架商品成功');
+            } else {
+                Yii::$app->session->setFlash('info', '上架商品失败');
+            }
+
+            return $this->redirect(['product/list']);
+        }
     }
 
     public function actionOff()
+    {
+        if (Yii::$app->request->isGet) {
+            $productId = Yii::$app->request->get('productId');
+            $product = Product::find()->where(['productId' => $productId])->one();
+
+            $product->isOn = 0;
+            if ($product->save()) {
+                Yii::$app->session->setFlash('info', '下架商品成功');
+            } else {
+                Yii::$app->session->setFlash('info', '下架商品失败');
+            }
+
+            return $this->redirect(['product/list']);
+        }
+    }
+
+    public function actionRemove()
     {
 
     }

@@ -40,8 +40,25 @@ use yii\helpers\Html;
                                 ['class' => 'span9']); ?>
                             <?php echo $form->field($product, 'isTui')->radioList(['0' => '不推荐', '1' => '推荐'],
                                 ['class' => 'span9']); ?>
-                            <?php echo $form->field($product, 'cover')->fileInput(['class' => 'span9']); ?>
-                            <?php echo $form->field($product, 'pics')->fileInput(['class' => 'span9']); ?>
+                            <?php
+                            if (!empty($product->cover)) {
+                                echo $form->field($product, 'cover')->fileInput(['class' => 'span9'])
+                                    . '<img src="http://' . $product->cover . '" style="width:200px;height:100%;">';
+                            } else {
+                                echo $form->field($product, 'cover')->fileInput(['class' => 'span9']);
+                            }
+                            ?>
+                            <?php
+                            if (!empty(json_decode($product->pics, true))) {
+                                $images = '';
+                                foreach (json_decode($product->pics, true) as $picture) {
+                                    $images .= '<img src="http://' . $picture . '" style="width:200px;height:100%;">';
+                                }
+                                echo $images.$form->field($product, 'pics[]')->fileInput(['class' => 'span9']);
+                            } else {
+                                echo $form->field($product, 'pics[]')->fileInput(['class' => 'span9']);
+                            }
+                            ?>
                             <input type='button' id="addpic" value='增加一个'>
                             <div class="span11 field-box actions">
                                 <?php echo Html::submitButton('提交', ['class' => 'btn-glow primary']); ?>
