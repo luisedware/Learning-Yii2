@@ -92,7 +92,6 @@ class ProductController extends Controller
         if (Yii::$app->request->isPost) {
             $post = Yii::$app->request->post();
             $uploader = new Qiniu(Product::AK, Product::SK, Product::DOMAIN, Product::BUCKET);
-            $post['Product']['cover'] = $product->cover;
             if ($_FILES['Product']['error']['cover'] == 0) {
                 $key = uniqid();
                 $uploader->uploadFile($_FILES['Product']['tmp_name']['cover'], $key);
