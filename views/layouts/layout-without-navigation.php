@@ -194,7 +194,6 @@
                                     </div>
                                 </li>
 
-
                                 <li class="checkout">
                                     <div class="basket-item">
                                         <div class="row">
@@ -207,14 +206,12 @@
                                         </div>
                                     </div>
                                 </li>
-
                             </ul>
                         </div><!-- /.basket -->
                     </div><!-- /.top-cart-holder -->
                 </div><!-- /.top-cart-row-container -->
                 <!-- ============================================================= SHOPPING CART DROPDOWN : END ============================================================= -->
             </div><!-- /.top-cart-row -->
-
         </div><!-- /.container -->
     </header>
     <?php echo $content; ?>
