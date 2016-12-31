@@ -2,9 +2,7 @@
 
 namespace app\controllers;
 
-use yii\web\Controller;
-
-class IndexController extends Controller
+class IndexController extends CommonController
 {
     public function actionIndex()
     {

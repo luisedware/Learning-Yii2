@@ -2,9 +2,7 @@
 
 namespace app\controllers;
 
-use yii\web\Controller;
-
-class OrderController extends Controller
+class OrderController extends CommonController
 {
     public $layout = false;
 

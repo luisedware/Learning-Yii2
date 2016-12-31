@@ -2,9 +2,7 @@
 
 namespace app\controllers;
 
-use yii\web\Controller;
-
-class ProductController extends Controller
+class ProductController extends CommonController
 {
     public $layout = "layout";
 

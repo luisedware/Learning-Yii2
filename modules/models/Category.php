@@ -13,6 +13,19 @@ class Category extends ActiveRecord
         return "{{%category}}";
     }
 
+    public static function getMenu()
+    {
+        $top = self::find()->where(['parentId' => 0])->asArray()->all();
+        $data = [];
+
+        foreach ((array)$top as $key => $category) {
+            $category['children'] = self::find()->where(['parentId'=>$category->cateId])->asArray()->all();
+            $data[$key] = $category;
+        }
+
+        return $data;
+    }
+
     public function attributeLabels()
     {
         return [
@@ -37,6 +50,20 @@ class Category extends ActiveRecord
             return true;
         }
         return false;
+    }
+
+    public function getOptions()
+    {
+        $data = $this->getData();
+        $tree = $this->getTree($data);
+        $tree = $this->setPrefix($tree);
+        $options = [];
+
+        foreach ($tree as $value) {
+            $options[$value['cateId']] = $value['title'];
+        }
+
+        return $options;
     }
 
     public function getData()
@@ -83,20 +110,6 @@ class Category extends ActiveRecord
             next($data);
         }
         return $tree;
-    }
-
-    public function getOptions()
-    {
-        $data = $this->getData();
-        $tree = $this->getTree($data);
-        $tree = $this->setPrefix($tree);
-        $options = [];
-
-        foreach ($tree as $value) {
-            $options[$value['cateId']] = $value['title'];
-        }
-
-        return $options;
     }
 
     public function getTreeList()

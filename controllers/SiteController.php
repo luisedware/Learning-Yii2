@@ -4,12 +4,11 @@ namespace app\controllers;
 
 use Yii;
 use yii\filters\AccessControl;
-use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 
-class SiteController extends Controller
+class SiteController extends CommonController
 {
     /**
      * @inheritdoc
@@ -55,7 +54,6 @@ class SiteController extends Controller
 
     /**
      * Displays homepage.
-     *
      * @return string
      */
     public function actionIndex()
@@ -65,7 +63,6 @@ class SiteController extends Controller
 
     /**
      * Login action.
-     *
      * @return string
      */
     public function actionLogin()
@@ -85,7 +82,6 @@ class SiteController extends Controller
 
     /**
      * Logout action.
-     *
      * @return string
      */
     public function actionLogout()
@@ -97,7 +93,6 @@ class SiteController extends Controller
 
     /**
      * Displays contact page.
-     *
      * @return string
      */
     public function actionContact()
@@ -115,7 +110,6 @@ class SiteController extends Controller
 
     /**
      * Displays about page.
-     *
      * @return string
      */
     public function actionAbout()

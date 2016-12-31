@@ -3,14 +3,13 @@
 namespace app\controllers;
 
 use app\models\User;
-use yii\web\Controller;
 use Yii;
 
 /**
  * 用户管理控制器
  * @package app\controllers
  */
-class MemberController extends Controller
+class MemberController extends CommonController
 {
     /**
      * @return string
@@ -22,7 +21,7 @@ class MemberController extends Controller
 
         if (Yii::$app->request->isPost) {
             $post = Yii::$app->request->post();
-            
+
             if ($model->login($post)) {
                 return $this->goBack(Yii::$app->request->referrer);
             }
