@@ -19,7 +19,7 @@ class Category extends ActiveRecord
         $data = [];
 
         foreach ((array)$top as $key => $category) {
-            $category['children'] = self::find()->where(['parentId'=>$category->cateId])->asArray()->all();
+            $category['children'] = self::find()->where(['parentId' => $category['cateId']])->asArray()->all();
             $data[$key] = $category;
         }
 

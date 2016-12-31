@@ -141,3 +141,45 @@ IF NOT EXISTS shop_product (
 )
   ENGINE = INNODB
   DEFAULT CHARSET = utf8;
+
+INSERT INTO `shop_category` (`title`, `parentId`, `createdAt`) VALUES ('前端开发', '0', '1482391487');
+INSERT INTO `shop_category` (`title`, `parentId`, `createdAt`) VALUES ('后端开发', '0', '1482391492');
+INSERT INTO `shop_category` (`title`, `parentId`, `createdAt`) VALUES ('移动开发', '0', '1483151192');
+INSERT INTO `shop_category` (`title`, `parentId`, `createdAt`) VALUES ('数据库', '0', '1483151199');
+INSERT INTO `shop_category` (`title`, `parentId`, `createdAt`) VALUES ('云计算&大数据', '0', '1483151212');
+INSERT INTO `shop_category` (`title`, `parentId`, `createdAt`) VALUES ('运维&测试', '0', '1483151220');
+INSERT INTO `shop_category` (`title`, `parentId`, `createdAt`) VALUES ('视觉设计', '0', '1483151227');
+INSERT INTO `shop_category` (`title`, `parentId`, `createdAt`) VALUES ('HTML 5 + CSS 3', '1', '1483151274');
+INSERT INTO `shop_category` (`title`, `parentId`, `createdAt`) VALUES ('JavaScript', '1', '1483151281');
+INSERT INTO `shop_category` (`title`, `parentId`, `createdAt`) VALUES ('jQuery', '1', '1483151286');
+INSERT INTO `shop_category` (`title`, `parentId`, `createdAt`) VALUES ('Node.js', '1', '1483151315');
+INSERT INTO `shop_category` (`title`, `parentId`, `createdAt`) VALUES ('AngularJS', '1', '1483151321');
+INSERT INTO `shop_category` (`title`, `parentId`, `createdAt`) VALUES ('Bootstrap', '1', '1483151326');
+INSERT INTO `shop_category` (`title`, `parentId`, `createdAt`) VALUES ('React', '1', '1483151331');
+INSERT INTO `shop_category` (`title`, `parentId`, `createdAt`) VALUES ('Sass', '1', '1483151337');
+INSERT INTO `shop_category` (`title`, `parentId`, `createdAt`) VALUES ('Vue.js', '1', '1483151347');
+INSERT INTO `shop_category` (`title`, `parentId`, `createdAt`) VALUES ('WebApp', '1', '1483151353');
+INSERT INTO `shop_category` (`title`, `parentId`, `createdAt`) VALUES ('PHP', '2', '1483151434');
+INSERT INTO `shop_category` (`title`, `parentId`, `createdAt`) VALUES ('Java', '2', '1483151442');
+INSERT INTO `shop_category` (`title`, `parentId`, `createdAt`) VALUES ('Python', '2', '1483151447');
+INSERT INTO `shop_category` (`title`, `parentId`, `createdAt`) VALUES ('C', '2', '1483151452');
+INSERT INTO `shop_category` (`title`, `parentId`, `createdAt`) VALUES ('C++', '2', '1483151457');
+INSERT INTO `shop_category` (`title`, `parentId`, `createdAt`) VALUES ('Go', '2', '1483151464');
+INSERT INTO `shop_category` (`title`, `parentId`, `createdAt`) VALUES ('C#', '2', '1483151471');
+INSERT INTO `shop_category` (`title`, `parentId`, `createdAt`) VALUES ('Ruby', '2', '1483151480');
+INSERT INTO `shop_category` (`title`, `parentId`, `createdAt`) VALUES ('Android', '3', '1483152015');
+INSERT INTO `shop_category` (`title`, `parentId`, `createdAt`) VALUES ('iOS', '3', '1483152027');
+INSERT INTO `shop_category` (`title`, `parentId`, `createdAt`) VALUES ('Unity 3D', '3', '1483152034');
+INSERT INTO `shop_category` (`title`, `parentId`, `createdAt`) VALUES ('Cocos2d-x', '3', '1483152040');
+INSERT INTO `shop_category` (`title`, `parentId`, `createdAt`) VALUES ('MySQL', '4', '1483152073');
+INSERT INTO `shop_category` (`title`, `parentId`, `createdAt`) VALUES ('MongoDB', '4', '1483152077');
+INSERT INTO `shop_category` (`title`, `parentId`, `createdAt`) VALUES ('Oracle', '4', '1483152082');
+INSERT INTO `shop_category` (`title`, `parentId`, `createdAt`) VALUES ('SQL Serve', '4', '1483152088');
+INSERT INTO `shop_category` (`title`, `parentId`, `createdAt`) VALUES ('Photoshop', '7', '1483152263');
+INSERT INTO `shop_category` (`title`, `parentId`, `createdAt`) VALUES ('Maya', '7', '1483152268');
+INSERT INTO `shop_category` (`title`, `parentId`, `createdAt`) VALUES ('Premiere', '7', '1483152273');
+INSERT INTO `shop_category` (`title`, `parentId`, `createdAt`) VALUES ('ZBrush', '7', '1483152279');
+INSERT INTO `shop_category` (`title`, `parentId`, `createdAt`) VALUES ('测试', '6', '1483152288');
+INSERT INTO `shop_category` (`title`, `parentId`, `createdAt`) VALUES ('Linux', '6', '1483152294');
+INSERT INTO `shop_category` (`title`, `parentId`, `createdAt`) VALUES ('大数据', '5', '1483152304');
+INSERT INTO `shop_category` (`title`, `parentId`, `createdAt`) VALUES ('云计算', '5', '1483152311');
