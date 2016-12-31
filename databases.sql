@@ -183,3 +183,18 @@ INSERT INTO `shop_category` (`title`, `parentId`, `createdAt`) VALUES ('测试',
 INSERT INTO `shop_category` (`title`, `parentId`, `createdAt`) VALUES ('Linux', '6', '1483152294');
 INSERT INTO `shop_category` (`title`, `parentId`, `createdAt`) VALUES ('大数据', '5', '1483152304');
 INSERT INTO `shop_category` (`title`, `parentId`, `createdAt`) VALUES ('云计算', '5', '1483152311');
+
+# 创建购物车
+DROP TABLE
+IF EXISTS shop_cart;
+
+CREATE TABLE
+IF NOT EXISTS shop_cart(
+  cartId BIGINT UNSIGNED NOT NULL auto_increment PRIMARY KEY ,
+  productId BIGINT UNSIGNED NOT NULL DEFAULT 0 ,
+  price DECIMAL(10 , 2) NOT NULL DEFAULT '0.00' ,
+  userId BIGINT UNSIGNED NOT NULL DEFAULT '0' ,
+  createdAt INT UNSIGNED NOT NULL DEFAULT '0' ,
+  KEY shop_cart_productId(productId) ,
+  KEY shop_cart_userId(userId)
+) ENGINE = INNODB DEFAULT CHARSET = utf8;
