@@ -95,25 +95,21 @@
 
                             <ul class="categories-filter animate-dropdown">
                                 <li class="dropdown">
-
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="category-grid.html">所有分类</a>
-
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li role="presentation">
-                                            <a role="menuitem" tabindex="-1" href="category-grid.html">电子产品</a></li>
-                                        <li role="presentation">
-                                            <a role="menuitem" tabindex="-1" href="category-grid.html">电子产品</a></li>
-                                        <li role="presentation">
-                                            <a role="menuitem" tabindex="-1" href="category-grid.html">电子产品</a></li>
-                                        <li role="presentation">
-                                            <a role="menuitem" tabindex="-1" href="category-grid.html">电子产品</a></li>
-
-                                    </ul>
+                                    <?php if(!empty($this->params['menu'])):?>
+                                        <a class="dropdown-toggle" data-toggle="dropdown" href="">所有分类</a>
+                                        <ul class="dropdown-menu" role="menu">
+                                        <?php foreach($this->params['menu'] as $key => $value):?>
+                                            <li role="presentation">
+                                                <a role="menuitem" tabindex="-1" href="#">
+                                                    <?php echo $value['title']; ?>
+                                                </a>
+                                            </li>
+                                        <?php endforeach;?>
+                                        </ul>
+                                    <?php endif?>
                                 </li>
                             </ul>
-
                             <a style="padding:15px 15px 13px 12px" class="search-button" href="#"></a>
-
                         </div>
                     </form>
                 </div><!-- /.search-area -->
