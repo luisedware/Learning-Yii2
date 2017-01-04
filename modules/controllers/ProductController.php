@@ -34,7 +34,7 @@ class ProductController extends Controller
         if (Yii::$app->request->isPost) {
             $post = Yii::$app->request->post();
             $pics = $this->upload();
-
+            
             if (!$pics) {
                 $product->addError('cover', '封面不能为空');
             } else {
@@ -112,8 +112,10 @@ class ProductController extends Controller
             
             $post['Product']['pics'] = json_encode(array_merge((array)json_decode($product->pics, true), $pics));
             
-            if ($product->load($post) && $product->save()) {
+            if ($product->load($post) && $product->save(false)) {
                 Yii::$app->session->setFlash('info', '修改商品成功');
+            }else{
+                Yii::$app->session->setFlash('info', '修改商品失败');
             }
         }
 
