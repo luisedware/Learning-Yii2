@@ -21,14 +21,13 @@
     <script src="assets/js/respond.min.js"></script>
 </head>
 <body>
-
 <div class="wrapper">
     <nav class="top-bar animate-dropdown">
         <div class="container">
             <div class="col-xs-12 col-sm-6 no-margin">
                 <ul>
-                    <li><a href="index.html">首页</a></li>
-                    <li><a href="category-grid.html">所有分类</a></li>
+                    <li><a href="<?php echo \yii\helpers\Url::to(['index/index']); ?>">首页</a></li>
+                    <li><a href="<?php echo \yii\helpers\Url::to(['product/index']); ?>">所有分类</a></li>
                     <li><a href="cart.html">我的购物车</a></li>
                     <li><a href="orders.html">我的订单</a></li>
                 </ul>
@@ -38,8 +37,8 @@
                     <?php if (\Yii::$app->session['isLogin']): ?>
                         您好,欢迎您回来<?php echo \Yii::$app->session['loginName']; ?>
                     <?php else: ?>
-                        <li><a href="authentication.html">注册</a></li>
-                        <li><a href="authentication.html">登录</a></li>
+                        <li><a href="<?php echo \yii\helpers\Url::to(['member/auth']); ?>">注册</a></li>
+                        <li><a href="<?php echo \yii\helpers\Url::to(['member/auth']); ?>">登录</a></li>
                     <?php endif; ?>
                 </ul>
             </div><!-- /.col -->
@@ -53,7 +52,7 @@
             <div class="col-xs-12 col-sm-12 col-md-3 logo-holder">
                 <!-- ============================================================= LOGO ============================================================= -->
                 <div class="logo">
-                    <a href="index.html">
+                    <a href="<?php echo \yii\helpers\Url::to(['index/index']); ?>">
                         <img alt="logo" src="assets/images/logo.PNG" width="233" height="54"/>
                     </a>
                 </div><!-- /.logo -->
@@ -212,13 +211,15 @@
                             <ul class="nav navbar-nav">
                                 <?php foreach ($this->params['menu'] as $key => $value): ?>
                                     <li class="dropdown hidden-md">
-                                        <a href="#" class="dropdown-toggle" data-hover="dropdown">
+                                        <a href="<?php echo \yii\helpers\Url::to(['product/index']); ?>" class="dropdown-toggle" data-hover="dropdown">
                                             <?php echo $value['title']; ?>
                                         </a>
                                         <?php if (!empty($value['children'])): ?>
                                             <ul class="dropdown-menu">
                                                 <?php foreach ($value['children'] as $k => $v): ?>
-                                                    <li><a href="#"><?php echo $v['title']; ?></a></li>
+                                                    <li>
+                                                        <a href="<?php echo \yii\helpers\Url::to(['product/index']); ?>"><?php echo $v['title']; ?></a>
+                                                    </li>
                                                 <?php endforeach; ?>
                                             </ul>
                                         <?php endif ?>
@@ -487,14 +488,20 @@
                         <div class="widget">
                             <h3>快速检索</h3>
                             <ul>
-                                <li><a href="category-grid.html">laptops &amp; computers</a></li>
-                                <li><a href="category-grid.html">Cameras &amp; Photography</a></li>
-                                <li><a href="category-grid.html">Smart Phones &amp; Tablets</a></li>
-                                <li><a href="category-grid.html">Video Games &amp; Consoles</a></li>
-                                <li><a href="category-grid.html">TV &amp; Audio</a></li>
-                                <li><a href="category-grid.html">Gadgets</a></li>
-                                <li><a href="category-grid.html">Car Electronic &amp; GPS</a></li>
-                                <li><a href="category-grid.html">Accesories</a></li>
+                                <li><a href="<?php echo \yii\helpers\Url::to(['product/index']); ?>">laptops &amp;
+                                        computers</a></li>
+                                <li><a href="<?php echo \yii\helpers\Url::to(['product/index']); ?>">Cameras &amp;
+                                        Photography</a></li>
+                                <li><a href="<?php echo \yii\helpers\Url::to(['product/index']); ?>">Smart Phones &amp;
+                                        Tablets</a></li>
+                                <li><a href="<?php echo \yii\helpers\Url::to(['product/index']); ?>">Video Games &amp;
+                                        Consoles</a></li>
+                                <li><a href="<?php echo \yii\helpers\Url::to(['product/index']); ?>">TV &amp; Audio</a>
+                                </li>
+                                <li><a href="<?php echo \yii\helpers\Url::to(['product/index']); ?>">Gadgets</a></li>
+                                <li><a href="<?php echo \yii\helpers\Url::to(['product/index']); ?>">Car Electronic
+                                        &amp; GPS</a></li>
+                                <li><a href="<?php echo \yii\helpers\Url::to(['product/index']); ?>">Accesories</a></li>
                             </ul>
                         </div><!-- /.widget -->
                     </div><!-- /.link-widget -->
@@ -503,14 +510,17 @@
                         <div class="widget">
                             <h3>热门商品</h3>
                             <ul>
-                                <li><a href="category-grid.html">Find a Store</a></li>
-                                <li><a href="category-grid.html">About Us</a></li>
-                                <li><a href="category-grid.html">Contact Us</a></li>
-                                <li><a href="category-grid.html">Weekly Deals</a></li>
-                                <li><a href="category-grid.html">Gift Cards</a></li>
-                                <li><a href="category-grid.html">Recycling Program</a></li>
-                                <li><a href="category-grid.html">Community</a></li>
-                                <li><a href="category-grid.html">Careers</a></li>
+                                <li><a href="<?php echo \yii\helpers\Url::to(['product/index']); ?>">Find a Store</a>
+                                </li>
+                                <li><a href="<?php echo \yii\helpers\Url::to(['product/index']); ?>">About Us</a></li>
+                                <li><a href="<?php echo \yii\helpers\Url::to(['product/index']); ?>">Contact Us</a></li>
+                                <li><a href="<?php echo \yii\helpers\Url::to(['product/index']); ?>">Weekly Deals</a>
+                                </li>
+                                <li><a href="<?php echo \yii\helpers\Url::to(['product/index']); ?>">Gift Cards</a></li>
+                                <li><a href="<?php echo \yii\helpers\Url::to(['product/index']); ?>">Recycling
+                                        Program</a></li>
+                                <li><a href="<?php echo \yii\helpers\Url::to(['product/index']); ?>">Community</a></li>
+                                <li><a href="<?php echo \yii\helpers\Url::to(['product/index']); ?>">Careers</a></li>
 
                             </ul>
                         </div><!-- /.widget -->
@@ -520,14 +530,19 @@
                         <div class="widget">
                             <h3>最近浏览</h3>
                             <ul>
-                                <li><a href="category-grid.html">My Account</a></li>
-                                <li><a href="category-grid.html">Order Tracking</a></li>
-                                <li><a href="category-grid.html">Wish List</a></li>
-                                <li><a href="category-grid.html">Customer Service</a></li>
-                                <li><a href="category-grid.html">Returns / Exchange</a></li>
-                                <li><a href="category-grid.html">FAQs</a></li>
-                                <li><a href="category-grid.html">Product Support</a></li>
-                                <li><a href="category-grid.html">Extended Service Plans</a></li>
+                                <li><a href="<?php echo \yii\helpers\Url::to(['product/index']); ?>">My Account</a></li>
+                                <li><a href="<?php echo \yii\helpers\Url::to(['product/index']); ?>">Order Tracking</a>
+                                </li>
+                                <li><a href="<?php echo \yii\helpers\Url::to(['product/index']); ?>">Wish List</a></li>
+                                <li><a href="<?php echo \yii\helpers\Url::to(['product/index']); ?>">Customer
+                                        Service</a></li>
+                                <li><a href="<?php echo \yii\helpers\Url::to(['product/index']); ?>">Returns /
+                                        Exchange</a></li>
+                                <li><a href="<?php echo \yii\helpers\Url::to(['product/index']); ?>">FAQs</a></li>
+                                <li><a href="<?php echo \yii\helpers\Url::to(['product/index']); ?>">Product Support</a>
+                                </li>
+                                <li><a href="<?php echo \yii\helpers\Url::to(['product/index']); ?>">Extended Service
+                                        Plans</a></li>
                             </ul>
                         </div><!-- /.widget -->
                     </div><!-- /.link-widget -->
@@ -540,7 +555,8 @@
             <div class="container">
                 <div class="col-xs-12 col-sm-6 no-margin">
                     <div class="copyright">
-                        &copy; <a href="index.html">Imooc.com</a> - all rights reserved
+                        &copy; <a href="<?php echo \yii\helpers\Url::to(['index/index']); ?>">Imooc.com</a> - all rights
+                        reserved
                     </div><!-- /.copyright -->
                 </div>
                 <div class="col-xs-12 col-sm-6 no-margin">

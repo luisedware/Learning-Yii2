@@ -135,7 +135,9 @@
                                 </div>
                                 <div class="hover-area">
                                     <div class="add-cart-button">
-                                        <a href="single-product.html" class="le-button">加入购物车</a>
+                                        <a href="<?php echo \yii\helpers\Url::to(['cart/add','productId'=>$product->productId]); ?>" class="le-button">
+                                            加入购物车
+                                        </a>
                                     </div>
                                 </div>
                             </div>

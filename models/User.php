@@ -189,8 +189,6 @@ class User extends ActiveRecord
 
             return (bool)$session['isLogin'];
         } else {
-            var_dump($this->getValidators());
-            exit;
             return false;
         }
 

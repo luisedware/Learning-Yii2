@@ -3,142 +3,41 @@
     <div class="container">
         <!-- ========================================= CONTENT ========================================= -->
         <div class="col-xs-12 col-md-9 items-holder no-margin">
-
-            <div class="row no-margin cart-item">
-                <div class="col-xs-12 col-sm-2 no-margin">
-                    <a href="#" class="thumb-holder">
-                        <img class="lazy" alt="" src="assets/images/products/product-small-01.jpg"/>
-                    </a>
-                </div>
-
-                <div class="col-xs-12 col-sm-5 ">
-                    <div class="title">
-                        <a href="#">white lumia 9001</a>
+            <?php foreach ($carts as $cart) : ?>
+                <div class="row no-margin cart-item">
+                    <div class="col-xs-12 col-sm-2 no-margin">
+                        <a href="<?php echo \yii\helpers\Url::to(['product/index']); ?>" class="thumb-holder">
+                            <img class="lazy" alt="" src="http://<?=$cart->product->cover?>"/>
+                        </a>
                     </div>
-                    <div class="brand">sony</div>
-                </div>
 
-                <div class="col-xs-12 col-sm-3 no-margin">
-                    <div class="quantity">
-                        <div class="le-quantity">
-                            <form>
-                                <a class="minus" href="#reduce"></a>
-                                <input name="quantity" readonly="readonly" type="text" value="1"/>
-                                <a class="plus" href="#add"></a>
-                            </form>
+                    <div class="col-xs-12 col-sm-5 ">
+                        <div class="title">
+                            <a href="#"><?=$cart->product->title?></a>
+                        </div>
+                        <div class="brand"><?=$cart->product->title?></div>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-3 no-margin">
+                        <div class="quantity">
+                            <div class="le-quantity">
+                                <form>
+                                    <a class="minus" href="#reduce"></a>
+                                    <input name="quantity" readonly="readonly" type="text" value="<?=$cart->productNum?>"/>
+                                    <a class="plus" href="#add"></a>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="col-xs-12 col-sm-2 no-margin">
-                    <div class="price">
-                        $2000.00
-                    </div>
-                    <a class="close-btn" href="#"></a>
-                </div>
-            </div><!-- /.cart-item -->
-
-            <div class="row no-margin cart-item">
-                <div class="col-xs-12 col-sm-2 no-margin">
-                    <a href="#" class="thumb-holder">
-                        <img class="lazy" alt="" src="assets/images/products/product-small-01.jpg"/>
-                    </a>
-                </div>
-
-                <div class="col-xs-12 col-sm-5">
-                    <div class="title">
-                        <a href="#">white lumia 9001 </a>
-                    </div>
-                    <div class="brand">sony</div>
-                </div>
-
-                <div class="col-xs-12 col-sm-3 no-margin">
-                    <div class="quantity">
-                        <div class="le-quantity">
-                            <form>
-                                <a class="minus" href="#reduce"></a>
-                                <input name="quantity" readonly="readonly" type="text" value="1"/>
-                                <a class="plus" href="#add"></a>
-                            </form>
+                    <div class="col-xs-12 col-sm-2 no-margin">
+                        <div class="price">
+                            <?php echo floatval($cart->productNum * $cart->price); ?>
                         </div>
+                        <a class="close-btn" href="#"></a>
                     </div>
                 </div>
-
-                <div class="col-xs-12 col-sm-2 no-margin">
-                    <div class="price">
-                        $2000.00
-                    </div>
-                    <a class="close-btn" href="#"></a>
-                </div>
-            </div><!-- /.cart-item -->
-
-            <div class="row no-margin cart-item">
-                <div class="col-xs-12 col-sm-2 no-margin">
-                    <a href="#" class="thumb-holder">
-                        <img class="lazy" alt="" src="assets/images/products/product-small-01.jpg"/>
-                    </a>
-                </div>
-
-                <div class="col-xs-12 col-sm-5">
-                    <div class="title">
-                        <a href="#">white lumia 9001 </a>
-                    </div>
-                    <div class="brand">sony</div>
-                </div>
-
-                <div class="col-xs-12 col-sm-3 no-margin">
-                    <div class="quantity">
-                        <div class="le-quantity">
-                            <form>
-                                <a class="minus" href="#reduce"></a>
-                                <input name="quantity" readonly="readonly" type="text" value="1"/>
-                                <a class="plus" href="#add"></a>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xs-12 col-sm-2 no-margin">
-                    <div class="price">
-                        $2000.00
-                    </div>
-                    <a class="close-btn" href="#"></a>
-                </div>
-            </div><!-- /.cart-item -->
-
-            <div class="row no-margin cart-item">
-                <div class="col-xs-12 col-sm-2 no-margin">
-                    <a href="#" class="thumb-holder">
-                        <img class="lazy" alt="" src="assets/images/products/product-small-01.jpg"/>
-                    </a>
-                </div>
-
-                <div class="col-xs-12 col-sm-5">
-                    <div class="title">
-                        <a href="#">white lumia 9001 </a>
-                    </div>
-                    <div class="brand">sony</div>
-                </div>
-
-                <div class="col-xs-12 col-sm-3 no-margin">
-                    <div class="quantity">
-                        <div class="le-quantity">
-                            <form>
-                                <a class="minus" href="#reduce"></a>
-                                <input name="quantity" readonly="readonly" type="text" value="1"/>
-                                <a class="plus" href="#add"></a>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xs-12 col-sm-2 no-margin">
-                    <div class="price">
-                        $2000.00
-                    </div>
-                    <a class="close-btn" href="#"></a>
-                </div>
-            </div><!-- /.cart-item -->
+            <?php endforeach; ?>
         </div>
         <!-- ========================================= CONTENT : END ========================================= -->
 

@@ -44,8 +44,8 @@
         <div class="container">
             <div class="col-xs-12 col-sm-6 no-margin">
                 <ul>
-                    <li><a href="index.html">首页</a></li>
-                    <li><a href="category-grid.html">所有分类</a></li>
+                    <li><a href="<?php echo \yii\helpers\Url::to(['index/index']); ?>">首页</a></li>
+                    <li><a href="<?php echo \yii\helpers\Url::to(['product/index']); ?>">所有分类</a></li>
                     <li><a href="cart.html">我的购物车</a></li>
                     <li><a href="orders.html">我的订单</a></li>
                 </ul>
@@ -56,8 +56,8 @@
                     <?php if (\Yii::$app->session['isLogin']): ?>
                         您好,欢迎您回来<?php echo \Yii::$app->session['loginName']; ?>
                     <?php else: ?>
-                        <li><a href="authentication.html">注册</a></li>
-                        <li><a href="authentication.html">登录</a></li>
+                        <li><a href="<?php echo \yii\helpers\Url::to(['member/auth']); ?>">注册</a></li>
+                        <li><a href="<?php echo \yii\helpers\Url::to(['member/auth']); ?>">登录</a></li>
                     <?php endif; ?>
                 </ul>
             </div><!-- /.col -->
@@ -95,18 +95,18 @@
 
                             <ul class="categories-filter animate-dropdown">
                                 <li class="dropdown">
-                                    <?php if(!empty($this->params['menu'])):?>
-                                        <a class="dropdown-toggle" data-toggle="dropdown" href="">所有分类</a>
+                                    <?php if (!empty($this->params['menu'])): ?>
+                                        <a class="dropdown-toggle" data-toggle="dropdown" href="<?php echo \yii\helpers\Url::to(['product/index']); ?>">所有分类</a>
                                         <ul class="dropdown-menu" role="menu">
-                                        <?php foreach($this->params['menu'] as $key => $value):?>
-                                            <li role="presentation">
-                                                <a role="menuitem" tabindex="-1" href="#">
-                                                    <?php echo $value['title']; ?>
-                                                </a>
-                                            </li>
-                                        <?php endforeach;?>
+                                            <?php foreach ($this->params['menu'] as $key => $value): ?>
+                                                <li role="presentation">
+                                                    <a role="menuitem" tabindex="-1" href="<?php echo \yii\helpers\Url::to(['product/index']); ?>">
+                                                        <?php echo $value['title']; ?>
+                                                    </a>
+                                                </li>
+                                            <?php endforeach; ?>
                                         </ul>
-                                    <?php endif?>
+                                    <?php endif ?>
                                 </li>
                             </ul>
                             <a style="padding:15px 15px 13px 12px" class="search-button" href="#"></a>
