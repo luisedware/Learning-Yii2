@@ -65,6 +65,20 @@ class CartController extends CommonController
 
         return $this->redirect(['cart/index']);
     }
+
+    public function actionMod()
+    {
+        $cartId = Yii::$app->request->get('cartId');
+        $productNum = Yii::$app->request->get('productNum');
+        Cart::updateAll(['productNum' => $productNum], ['cartId' => $cartId]);
+    }
+
+    public function actionDel()
+    {
+        $cartId = Yii::$app->request->get('cartId');
+        Cart::deleteAll('cartId = :cid', [':cid' => $cartId]);
+        return $this->redirect(['cart/index']);
+    }
 }
 
 

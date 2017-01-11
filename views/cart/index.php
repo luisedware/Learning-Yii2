@@ -54,7 +54,7 @@
                         </li>
                         <li>
                             <label>运费</label>
-                            <div class="value pull-right">$10</div>
+                            <div class="value pull-right">0</div>
                         </li>
                     </ul>
                     <ul id="total-price" class="tabled-data inverse-bold no-border">
