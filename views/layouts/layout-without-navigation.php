@@ -46,7 +46,7 @@
                 <ul>
                     <li><a href="<?php echo \yii\helpers\Url::to(['index/index']); ?>">首页</a></li>
                     <li><a href="<?php echo \yii\helpers\Url::to(['product/index']); ?>">所有分类</a></li>
-                    <li><a href="cart.html">我的购物车</a></li>
+                    <li><a href="<?php echo \yii\helpers\Url::to(['cart/index'])?>">我的购物车</a></li>
                     <li><a href="orders.html">我的订单</a></li>
                 </ul>
             </div><!-- /.col -->

@@ -1,9 +1,18 @@
+<?php
+use yii\bootstrap\ActiveForm;
+?>
 <!-- ============================================================= HEADER : END ============================================================= -->
 <section id="cart-page">
+    <?php $form = ActiveForm::begin([
+        'action' => \yii\helpers\Url::to(['order/add']),
+    ])?>
     <div class="container">
-        <!-- ========================================= CONTENT ========================================= -->
+
         <div class="col-xs-12 col-md-9 items-holder no-margin">
-            <?php foreach ($carts as $cart) : ?>
+            <?php foreach ($carts as $key => $cart) : ?>
+                <input type="hidden" name="OrderDetail[<?=$key?>]['productId']" value="<?=$cart->productId?>">
+                <input type="hidden" name="OrderDetail[<?=$key?>]['price']" value="<?=$cart->price?>">
+                <input type="hidden" name="OrderDetail[<?=$key?>]['productNum']" value="<?=$cart->productNum?>">
                 <div class="row no-margin cart-item">
                     <div class="col-xs-12 col-sm-2 no-margin">
                         <a href="<?php echo \yii\helpers\Url::to(['product/index']); ?>" class="thumb-holder">
@@ -50,7 +59,7 @@
                     <ul class="tabled-data no-border inverse-bold">
                         <li>
                             <label>购物车总价</label>
-                            <div class="value pull-right">$8434.00</div>
+                            <div class="value pull-right"></div>
                         </li>
                         <li>
                             <label>运费</label>
@@ -60,12 +69,12 @@
                     <ul id="total-price" class="tabled-data inverse-bold no-border">
                         <li>
                             <label>订单总价</label>
-                            <div class="value pull-right">$8444.00</div>
+                            <div class="value pull-right"></div>
                         </li>
                     </ul>
                     <div class="buttons-holder">
-                        <a class="le-button big" href="checkout.html">去结算</a>
-                        <a class="simple-link block" href="index.html">继续购物</a>
+                        <button type="submit" class="le-button big">去结算</button>
+                        <a class="simple-link block" href="<?php echo \yii\helpers\Url::to(['product/index']); ?>">继续购物</a>
                     </div>
                 </div>
             </div><!-- /.widget -->
@@ -85,5 +94,6 @@
 
         <!-- ========================================= SIDEBAR : END ========================================= -->
     </div>
+    <?php ActiveForm::end() ?>
 </section>        <!-- ============================================================= FOOTER ============================================================= -->
 
