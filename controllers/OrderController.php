@@ -97,4 +97,57 @@ class OrderController extends CommonController
         }
 
     }
+
+    public function actionConfirm()
+    {
+        try {
+            if (Yii::$app->session['isLogin'] != 1) {
+                return $this->redirect(['member/auth']);
+            }
+
+            if (!Yii::$app->request->isPost) {
+                throw new \Exception();
+            }
+
+            $post = Yii::$app->request->post();
+            $loginName = Yii::$app->session['loginName'];
+            $userModel = User::find()->where(['userName' => $loginName, 'userEmail' => $loginName])->one();
+
+            if (empty($userModel)) {
+                throw new \Exception();
+            }
+
+            $userId = $userModel->userId;
+            $orderModel = Order::find()->where(['orderId' => $post['orderId'], 'userId' => $userId])->one();
+            if (!$orderModel) {
+                throw new \Exception();
+            }
+            $orderModel->scenario = "update";
+            $post['status'] = Order::CHECK_ORDER;
+            $details = OrderDetail::find()->where(['orderId' => $post['orderId'], 'userId' => $userId])->all();
+            $amount = 0;
+
+            foreach ($details as $detail) {
+                $amount += $detail->productNum * $detail->price;
+            }
+
+            if ($amount <= 0) {
+                throw new \Exception();
+            }
+
+            $express = Yii::$app->params['expressPrice'][$post['expressId']];
+            if ($express < 0) {
+                throw new \Exception();
+            }
+
+            $amount += $express;
+            $post['amount'] = $amount;
+            $data['Order'] = $post;
+            if ($orderModel->load($data) && $orderModel->save()) {
+                return $this->redirect(['order/pay', 'orderId' => $post['orderId']]);
+            }
+        } catch (\Exception $e) {
+            return $this->redirect(['index/index']);
+        }
+    }
 }
