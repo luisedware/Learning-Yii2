@@ -189,68 +189,76 @@ DROP TABLE
 IF EXISTS shop_cart;
 
 CREATE TABLE
-IF NOT EXISTS shop_cart(
-  cartId BIGINT UNSIGNED NOT NULL auto_increment PRIMARY KEY ,
-  productId BIGINT UNSIGNED NOT NULL DEFAULT 0 ,
-  productNum INT UNSIGNED NOT NULL DEFAULT 0,
-  price DECIMAL(10 , 2) NOT NULL DEFAULT '0.00' ,
-  userId BIGINT UNSIGNED NOT NULL DEFAULT '0' ,
-  createdAt INT UNSIGNED NOT NULL DEFAULT '0' ,
-  KEY shop_cart_productId(productId) ,
+IF NOT EXISTS shop_cart (
+  cartId     BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  productId  BIGINT UNSIGNED NOT NULL DEFAULT 0,
+  productNum INT UNSIGNED    NOT NULL DEFAULT 0,
+  price      DECIMAL(10, 2)  NOT NULL DEFAULT '0.00',
+  userId     BIGINT UNSIGNED NOT NULL DEFAULT '0',
+  createdAt  INT UNSIGNED    NOT NULL DEFAULT '0',
+  KEY shop_cart_productId(productId),
   KEY shop_cart_userId(userId)
-) ENGINE = INNODB DEFAULT CHARSET = utf8;
+)
+  ENGINE = INNODB
+  DEFAULT CHARSET = utf8;
 
 # 订单表
 DROP TABLE
 IF EXISTS shop_order;
 
 CREATE TABLE
-IF NOT EXISTS shop_order(
-  orderId BIGINT UNSIGNED NOT NULL auto_increment PRIMARY KEY ,
-  userId BIGINT UNSIGNED NOT NULL DEFAULT 0 ,
-  addressId BIGINT UNSIGNED NOT NULL DEFAULT 0 ,
-  amount DECIMAL(10 , 2) NOT NULL DEFAULT 0.00 ,
-  STATUS INT UNSIGNED NOT NULL DEFAULT 0 ,
-  expressId INT UNSIGNED NOT NULL DEFAULT 0 ,
-  expressNo VARCHAR(50) NOT NULL DEFAULT '' ,
-  created INT UNSIGNED NOT NULL DEFAULT 0 ,
-  updated INT UNSIGNED NOT NULL DEFAULT 0 ,
-  KEY shop_order_userId(`userId`) ,
-  KEY shop_order_addressId(`addressId`) ,
+IF NOT EXISTS shop_order (
+  orderId   BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  userId    BIGINT UNSIGNED NOT NULL DEFAULT 0,
+  addressId BIGINT UNSIGNED NOT NULL DEFAULT 0,
+  amount    DECIMAL(10, 2)  NOT NULL DEFAULT 0.00,
+  status    INT UNSIGNED    NOT NULL DEFAULT 0,
+  expressId INT UNSIGNED    NOT NULL DEFAULT 0,
+  expressNo VARCHAR(50)     NOT NULL DEFAULT '',
+  created   INT UNSIGNED    NOT NULL DEFAULT 0,
+  updated   INT UNSIGNED    NOT NULL DEFAULT 0,
+  KEY shop_order_userId(`userId`),
+  KEY shop_order_addressId(`addressId`),
   KEY shop_order_expressId(`expressId`)
-) ENGINE = INNODB DEFAULT charset = 'utf8';
+)
+  ENGINE = INNODB
+  DEFAULT CHARSET = 'utf8';
 
 # 订单详情表
 DROP TABLE
 IF EXISTS shop_order_detail;
 
 CREATE TABLE
-IF NOT EXISTS shop_order_detail(
-  detailId BIGINT UNSIGNED NOT NULL auto_increment PRIMARY KEY ,
-  productId BIGINT UNSIGNED NOT NULL DEFAULT 0 ,
-  price DECIMAL(10 , 2) NOT NULL DEFAULT 0.00 ,
-  productNum INT UNSIGNED NOT NULL DEFAULT 0 ,
-  orderId BIGINT UNSIGNED NOT NULL DEFAULT 0 ,
-  created INT UNSIGNED NOT NULL DEFAULT 0 ,
-  KEY shop_order_detail_productId(`productId`) ,
+IF NOT EXISTS shop_order_detail (
+  detailId   BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  productId  BIGINT UNSIGNED NOT NULL DEFAULT 0,
+  price      DECIMAL(10, 2)  NOT NULL DEFAULT 0.00,
+  productNum INT UNSIGNED    NOT NULL DEFAULT 0,
+  orderId    BIGINT UNSIGNED NOT NULL DEFAULT 0,
+  created    INT UNSIGNED    NOT NULL DEFAULT 0,
+  KEY shop_order_detail_productId(`productId`),
   KEY shop_order_detail_orderId(`orderId`)
-) ENGINE = INNODB DEFAULT charset = 'utf8';
+)
+  ENGINE = INNODB
+  DEFAULT CHARSET = 'utf8';
 
 # 地址表
 DROP TABLE
 IF EXISTS shop_address;
 
 CREATE TABLE
-IF NOT EXISTS shop_address(
-  addressId BIGINT UNSIGNED NOT NULL auto_increment PRIMARY KEY ,
-  firstName VARCHAR(32) NOT NULL DEFAULT '' ,
-  lastName VARCHAR(32) NOT NULL DEFAULT '' ,
-  company VARCHAR(10) NOT NULL DEFAULT '' ,
-  address TEXT ,
-  postCode CHAR(6) NOT NULL DEFAULT '' ,
-  email VARCHAR(100) NOT NULL DEFAULT '' ,
-  telPhone VARCHAR(20) NOT NULL DEFAULT '' ,
-  userId BIGINT UNSIGNED NOT NULL DEFAULT 0 ,
-  created INT UNSIGNED NOT NULL DEFAULT 0 ,
+IF NOT EXISTS shop_address (
+  addressId BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  firstName VARCHAR(32)     NOT NULL DEFAULT '',
+  lastName  VARCHAR(32)     NOT NULL DEFAULT '',
+  company   VARCHAR(10)     NOT NULL DEFAULT '',
+  address   TEXT,
+  postCode  CHAR(6)         NOT NULL DEFAULT '',
+  email     VARCHAR(100)    NOT NULL DEFAULT '',
+  telPhone  VARCHAR(20)     NOT NULL DEFAULT '',
+  userId    BIGINT UNSIGNED NOT NULL DEFAULT 0,
+  created   INT UNSIGNED    NOT NULL DEFAULT 0,
   KEY shop_address_userId(`userId`)
-) ENGINE = INNODB DEFAULT charset = 'utf8';
+)
+  ENGINE = INNODB
+  DEFAULT CHARSET = 'utf8';

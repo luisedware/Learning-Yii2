@@ -7,12 +7,16 @@ use yii\bootstrap\ActiveForm;
         'action' => \yii\helpers\Url::to(['order/add']),
     ])?>
     <div class="container">
-
+        <?php
+            if (Yii::$app->session->has('info')) {
+                echo Yii::$app->session['info'];
+            }
+        ?>
         <div class="col-xs-12 col-md-9 items-holder no-margin">
             <?php foreach ($carts as $key => $cart) : ?>
-                <input type="hidden" name="OrderDetail[<?=$key?>]['productId']" value="<?=$cart->productId?>">
-                <input type="hidden" name="OrderDetail[<?=$key?>]['price']" value="<?=$cart->price?>">
-                <input type="hidden" name="OrderDetail[<?=$key?>]['productNum']" value="<?=$cart->productNum?>">
+                <input type="hidden" name="OrderDetail[<?=$key?>][productId]" value="<?=$cart->productId?>">
+                <input type="hidden" name="OrderDetail[<?=$key?>][price]" value="<?=$cart->price?>">
+                <input type="hidden" name="OrderDetail[<?=$key?>][productNum]" value="<?=$cart->productNum?>">
                 <div class="row no-margin cart-item">
                     <div class="col-xs-12 col-sm-2 no-margin">
                         <a href="<?php echo \yii\helpers\Url::to(['product/index']); ?>" class="thumb-holder">

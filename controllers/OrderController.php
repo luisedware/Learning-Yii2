@@ -58,6 +58,7 @@ class OrderController extends CommonController
                     $product['orderId'] = $orderId;
                     $product['created'] = time();
                     $data['OrderDetail'] = $product;
+
                     if (!$model->add($data)) {
                         throw new \Exception("订单详情生成失败");
                     }
