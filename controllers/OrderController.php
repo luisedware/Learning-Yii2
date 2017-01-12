@@ -2,8 +2,11 @@
 
 namespace app\controllers;
 
+use app\models\Cart;
 use app\models\Order;
+use app\models\OrderDetail;
 use app\models\User;
+use app\modules\models\Product;
 use Yii;
 
 class OrderController extends CommonController
@@ -38,20 +41,40 @@ class OrderController extends CommonController
                     [':userName' => $userName, ':userEmail' => $userName])->one();
 
                 if (!$userModel) {
-                    throw new \Exception();
+                    throw new \Exception("没有找到登录用户");
                 }
 
                 $userId = $userModel->userId;
                 $orderModel->userId = $userId;
                 $orderModel->status = Order::CREATE_ORDER;
+                $orderModel->created = time();
                 if (!$orderModel->save()) {
-                    throw new \Exception();
+                    throw new \Exception("订单生成失败");
                 }
 
                 $orderId = $orderModel->getPrimaryKey();
+                foreach ($post['OrderDetail'] as $product) {
+                    $model = new OrderDetail();
+                    $product['orderId'] = $orderId;
+                    $product['created'] = time();
+                    $data['OrderDetail'] = $product;
+                    if (!$model->add($data)) {
+                        throw new \Exception("订单详情生成失败");
+                    }
+                    Cart::deleteAll('productId = :pid', [':pid' => $product['productId']]);
+                    Product::updateAllCounters(['num' => -$product['productNum']], 'productId = :pid',
+                        [':pid' => $product['productId']]);
+                }
+                $transaction->commit();
+
+                return $this->redirect(['order/check', 'orderId' => $orderId]);
             }
         } catch (\Exception $e) {
+            $transaction->rollBack();
+            Yii::$app->session->setFlash('info', $e->getMessage() . $e->getFile() . $e->getLine());
 
+            return $this->redirect(['cart/index']);
         }
+
     }
 }
