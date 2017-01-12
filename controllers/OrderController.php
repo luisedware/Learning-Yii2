@@ -31,14 +31,17 @@ class OrderController extends CommonController
         if ($status != Order::CREATE_ORDER && $status != Order::CHECK_ORDER) {
             return $this->redirect(['order/index']);
         }
-
         $where = 'userName = :name or userEmail = :email';
         $value = [':name' => Yii::$app->session['loginName'], ':email' => Yii::$app->session['loginName']];
         $userId = User::find()->where($where, $value);
-        $addresses = Address::find()->where('userId = :uid', [':uid' => $userId])->asArray()->all();
+
         $details = OrderDetail::find()->with('product')->where(['orderId' => $orderId])->asArray()->all();
+        $addresses = Address::find()->where('userId = :uid', [':uid' => $userId])->asArray()->all();
+        $express = Yii::$app->params['express'];
+        $expressPrice = Yii::$app->params['expressPrice'];
         $this->layout = 'layout-without-navigation';
-        return $this->render('check', compact('addresses', 'details'));
+
+        return $this->render('check', compact('addresses', 'details', 'express', 'expressPrice'));
     }
 
     public function actionAdd()
