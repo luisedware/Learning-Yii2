@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Address;
 use app\models\Cart;
 use app\models\Order;
 use app\models\OrderDetail;
@@ -21,8 +22,23 @@ class OrderController extends CommonController
 
     public function actionCheck()
     {
+        if (Yii::$app->session['isLogin'] != 1) {
+            return $this->redirect(['member/auth']);
+        }
+
+        $orderId = Yii::$app->request->get('orderId');
+        $status = Order::find()->where(['orderId' => $orderId])->one()->status;
+        if ($status != Order::CREATE_ORDER && $status != Order::CHECK_ORDER) {
+            return $this->redirect(['order/index']);
+        }
+
+        $where = 'userName = :name or userEmail = :email';
+        $value = [':name' => Yii::$app->session['loginName'], ':email' => Yii::$app->session['loginName']];
+        $userId = User::find()->where($where, $value);
+        $addresses = Address::find()->where('userId = :uid', [':uid' => $userId])->asArray()->all();
+        $details = OrderDetail::find()->with('product')->where(['orderId' => $orderId])->asArray()->all();
         $this->layout = 'layout-without-navigation';
-        return $this->render('check');
+        return $this->render('check', compact('addresses', 'details'));
     }
 
     public function actionAdd()

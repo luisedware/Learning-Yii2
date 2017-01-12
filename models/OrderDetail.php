@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\modules\models\Product;
 use yii\db\ActiveRecord;
 
 class OrderDetail extends ActiveRecord
@@ -25,5 +26,10 @@ class OrderDetail extends ActiveRecord
         } else {
             return false;
         }
+    }
+
+    public function getProduct()
+    {
+        return $this->hasOne(Product::class, ['productId' => 'productId']);
     }
 }
